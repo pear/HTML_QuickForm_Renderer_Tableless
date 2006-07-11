@@ -36,7 +36,7 @@ $form->display();</description>
   <release>alpha</release>
   <api>alpha</api>
  </stability>
- <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+ <license uri="http://www.php.net/license/3_01.txt">PHP License 3.01</license>
  <notes>
 initial PEAR release
  </notes>
