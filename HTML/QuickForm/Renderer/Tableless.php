@@ -142,7 +142,9 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         } else {
             $header_html = str_replace('{header}', $header->toHtml(), $this->_headerTemplate);
         }
-        $this->_html .= $this->_closeFieldsetTemplate;
+        if ($this->_fieldsetIsOpen) {
+            $this->_html .= $this->_closeFieldsetTemplate;
+        }
         $openFieldsetTemplate = str_replace('{id}', $id, $this->_openFieldsetTemplate);
         $this->_html .= $openFieldsetTemplate . $header_html;
         $this->_fieldsetIsOpen = true;
