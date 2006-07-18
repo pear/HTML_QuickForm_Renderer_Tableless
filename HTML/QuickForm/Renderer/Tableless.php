@@ -73,7 +73,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @var      string
     * @access   private
     */
-    var $_openFieldsetTemplate = "\n\t<fieldset>";
+    var $_openFieldsetTemplate = "\n\t<fieldset{id}>";
 
    /**
     * Template used when closing a fieldset
@@ -125,6 +125,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     function renderHeader(&$header)
     {
         $name = $header->getName();
+        $id = empty($name) ? '' : ' id="' . $name . '"';
         if (is_null($header->_text)) {
             $header_html = '';
         }
@@ -136,7 +137,8 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         if ($this->_fieldsetIsOpen) {
             $this->_html .= $this->_closeFieldsetTemplate;
         }
-        $this->_html .= $this->_openFieldsetTemplate . $header_html;
+        $openFieldsetTemplate = str_replace('{id}', $id, $this->_openFieldsetTemplate);
+        $this->_html .= $openFieldsetTemplate . $header_html;
         $this->_fieldsetIsOpen = true;
     } // end func renderHeader
 
