@@ -12,6 +12,9 @@ form fieldset {
     margin: 0;
     width: 560px;
 }
+form fieldset.hidden {
+    border: 0;
+}
 form fieldset legend {
     font-weight: bold;
 }

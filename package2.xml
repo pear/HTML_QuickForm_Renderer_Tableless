@@ -26,11 +26,11 @@ echo $renderer->toHtml();</description>
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-07-11</date>
- <time>21:00:00</time>
+ <date>2006-07-18</date>
+ <time>16:25:00</time>
  <version>
-  <release>0.3.0</release>
-  <api>0.3.0</api>
+  <release>0.3.1</release>
+  <api>0.3.1</api>
  </version>
  <stability>
   <release>alpha</release>
@@ -38,7 +38,20 @@ echo $renderer->toHtml();</description>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License 3.01</license>
  <notes>
-initial PEAR release
+- Bug #8222: several fixes to get valid XHTML code:
+  * a fieldset tag is now only closed if a fieldset tag is open
+  * the (internal) open fieldset status variable is now resetted for a second
+    (third, ...) form on the same page
+  * QuickForm's internal hidden fields are not put into an invisible div
+    (=> the form template has changed)
+  * every other element is now put into a fieldset; elements that were outside
+    a fieldset in the last releases are now in a "hidden" fieldset (using a new
+    template that can be changed via setOpenHiddenFieldsetTemplate(), and using
+    a new CSS style 'form fieldset.hidden' in data/stylesheet.css)
+  (thanks to Daniel Maglione, danielmaglione at gmail dot com)
+- Request #8236: the template for the opening fieldset tag now includes a variable
+  for an id which is filled with the name of the header element (if given)
+  (thanks to v8kf6x11fb5v06l at jetable dot org)
  </notes>
  <contents>
   <dir name="/">

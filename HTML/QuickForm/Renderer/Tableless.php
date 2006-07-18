@@ -66,7 +66,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_formTemplate = 
-        "\n<form{attributes}>\n\t{hidden}\n{content}\n</form>";
+        "\n<form{attributes}>\n\t<div style=\"display: none;\">{hidden}</div>\n{content}\n</form>";
 
    /**
     * Template used when opening a fieldset
@@ -74,6 +74,14 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_openFieldsetTemplate = "\n\t<fieldset{id}>";
+
+   /**
+    * Template used when opening a hidden fieldset
+    * (i.e. a fieldset that is opened when there is no header element)
+    * @var      string
+    * @access   private
+    */
+    var $_openHiddenFieldsetTemplate = "\n\t<fieldset class=\"hidden\">";
 
    /**
     * Template used when closing a fieldset
@@ -134,9 +142,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         } else {
             $header_html = str_replace('{header}', $header->toHtml(), $this->_headerTemplate);
         }
-        if ($this->_fieldsetIsOpen) {
-            $this->_html .= $this->_closeFieldsetTemplate;
-        }
+        $this->_html .= $this->_closeFieldsetTemplate;
         $openFieldsetTemplate = str_replace('{id}', $id, $this->_openFieldsetTemplate);
         $this->_html .= $openFieldsetTemplate . $header_html;
         $this->_fieldsetIsOpen = true;
@@ -160,6 +166,12 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
            ) {
             $this->_html .= $this->_closeFieldsetTemplate;
             $this->_fieldsetIsOpen = false;
+        }
+        // if no fieldset was opened, we need to open a hidden one here to get
+        // XHTML validity
+        if (!$this->_fieldsetIsOpen) {
+            $this->_html .= $this->_openHiddenFieldsetTemplate;
+            $this->_fieldsetIsOpen = true;
         }
         if (!$this->_inGroup) {
             $html = $this->_prepareTemplate($element->getName(), $element->getLabel(), $required, $error);
@@ -215,10 +227,27 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     */
     function finishForm(&$form)
     {
+        // add a required note, if one is needed
+        if (!empty($form->_required) && !$form->_freezeAll) {
+            $this->_html .= str_replace('{requiredNote}', $form->getRequiredNote(), $this->_requiredNoteTemplate);
+        }
+        // close the open fieldset
         if ($this->_fieldsetIsOpen) {
             $this->_html .= $this->_closeFieldsetTemplate;
         }
-        parent::finishForm($form);
+        // add form attributes and content
+        $html = str_replace('{attributes}', $form->getAttributes(true), $this->_formTemplate);
+        if (strpos($this->_formTemplate, '{hidden}')) {
+            $html = str_replace('{hidden}', $this->_hiddenHtml, $html);
+        } else {
+            $this->_html .= $this->_hiddenHtml;
+        }
+        $this->_hiddenHtml = '';
+        $this->_html = str_replace('{content}', $this->_html, $html);
+        // add a validation script
+        if ('' != ($script = $form->getValidationScript())) {
+            $this->_html = $script . "\n" . $this->_html;
+        }
     } // end func finishForm
 
     /**
@@ -232,6 +261,19 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     {
         $this->_openFieldsetTemplate = $html;
     } // end func setOpenFieldsetTemplate
+
+    /**
+     * Sets the template used when opening a hidden fieldset
+     * (i.e. a fieldset that is opened when there is no header element)
+     *
+     * @param       string      The HTML used when opening a hidden fieldset
+     * @access      public
+     * @return      void
+     */
+    function setOpenHiddenFieldsetTemplate($html)
+    {
+        $this->_openHiddenFieldsetTemplate = $html;
+    } // end func setOpenHiddenFieldsetTemplate
 
     /**
      * Sets the template used when closing a fieldset
