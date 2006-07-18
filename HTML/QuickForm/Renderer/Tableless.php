@@ -193,6 +193,19 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     } // end func renderElement
 
    /**
+    * Called when visiting a form, before processing any form elements
+    *
+    * @param    object      An HTML_QuickForm object being visited
+    * @access   public
+    * @return   void
+    */
+    function startForm(&$form)
+    {
+        $this->_fieldsetIsOpen = false;
+        parent::startForm($form);
+    } // end func startForm
+
+   /**
     * Called when visiting a form, after processing all form elements
     * Adds required note, form attributes, validation javascript and form content.
     * 
