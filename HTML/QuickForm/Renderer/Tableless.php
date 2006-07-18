@@ -152,8 +152,10 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     */
     function renderElement(&$element, $required, $error)
     {
-        // if the element names indicates the end of a fieldset, close the fieldset
-        if (in_array($element->getName(), $this->_stopFieldsetElements)) {
+        // if the element name indicates the end of a fieldset, close the fieldset
+        if (   in_array($element->getName(), $this->_stopFieldsetElements)
+            && $this->_fieldsetIsOpen
+           ) {
             $this->_html .= $this->_closeFieldsetTemplate;
             $this->_fieldsetIsOpen = false;
         }
