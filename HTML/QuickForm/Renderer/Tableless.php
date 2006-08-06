@@ -19,8 +19,8 @@
  * @author     Mark Wiesemann <wiesemann@php.net>
  * @copyright  2005-2006 The PHP Group
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version    CVS: $Id $
- * @link       http://pear.php.net/package/[...]
+ * @version    CVS: $Id$
+ * @link       http://pear.php.net/package/HTML_QuickForm_Renderer_Tableless
  */
 
 require_once 'HTML/QuickForm/Renderer/Default.php';
@@ -99,11 +99,11 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         "\n\t\t{requiredNote}";
 
    /**
-    * Whether a fieldset tag is open or not
-    * @var      bool
+    * How many fieldsets are open
+    * @var      integer
     * @access   private
     */
-   var $_fieldsetIsOpen = false;
+   var $_fieldsetsOpen = 0;
 
    /**
     * Array of element names that indicate the end of a fieldset
@@ -142,12 +142,13 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         } else {
             $header_html = str_replace('{header}', $header->toHtml(), $this->_headerTemplate);
         }
-        if ($this->_fieldsetIsOpen) {
+        if ($this->_fieldsetsOpen > 0) {
             $this->_html .= $this->_closeFieldsetTemplate;
+            $this->_fieldsetsOpen--;
         }
         $openFieldsetTemplate = str_replace('{id}', $id, $this->_openFieldsetTemplate);
         $this->_html .= $openFieldsetTemplate . $header_html;
-        $this->_fieldsetIsOpen = true;
+        $this->_fieldsetsOpen++;
     } // end func renderHeader
 
    /**
@@ -164,16 +165,16 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     {
         // if the element name indicates the end of a fieldset, close the fieldset
         if (   in_array($element->getName(), $this->_stopFieldsetElements)
-            && $this->_fieldsetIsOpen
+            && $this->_fieldsetsOpen > 0
            ) {
             $this->_html .= $this->_closeFieldsetTemplate;
-            $this->_fieldsetIsOpen = false;
+            $this->_fieldsetsOpen--;
         }
         // if no fieldset was opened, we need to open a hidden one here to get
         // XHTML validity
-        if (!$this->_fieldsetIsOpen) {
+        if ($this->_fieldsetsOpen === 0) {
             $this->_html .= $this->_openHiddenFieldsetTemplate;
-            $this->_fieldsetIsOpen = true;
+            $this->_fieldsetsOpen++;
         }
         if (!$this->_inGroup) {
             $html = $this->_prepareTemplate($element->getName(), $element->getLabel(), $required, $error);
@@ -215,7 +216,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     */
     function startForm(&$form)
     {
-        $this->_fieldsetIsOpen = false;
+        $this->_fieldsetsOpen = 0;
         parent::startForm($form);
     } // end func startForm
 
@@ -234,8 +235,9 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
             $this->_html .= str_replace('{requiredNote}', $form->getRequiredNote(), $this->_requiredNoteTemplate);
         }
         // close the open fieldset
-        if ($this->_fieldsetIsOpen) {
+        if ($this->_fieldsetsOpen > 0) {
             $this->_html .= $this->_closeFieldsetTemplate;
+            $this->_fieldsetsOpen--;
         }
         // add form attributes and content
         $html = str_replace('{attributes}', $form->getAttributes(true), $this->_formTemplate);

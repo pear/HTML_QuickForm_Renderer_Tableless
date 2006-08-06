@@ -26,8 +26,8 @@ echo $renderer->toHtml();</description>
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-07-18</date>
- <time>16:25:00</time>
+ <date>2006-08-06</date>
+ <time>15:00:00</time>
  <version>
   <release>0.3.2</release>
   <api>0.3.1</api>
@@ -38,7 +38,9 @@ echo $renderer->toHtml();</description>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License 3.01</license>
  <notes>
-- Request #8241: the fieldset should only be closed if it is open
+- Request #8241: a fieldset should only be closed if it is open, this also
+  improved usage of this renderer with subforms (which are part of
+  DB_DataObject_FormBuilder)
   (thanks to Brett Bieber, brett dot bieber at gmail dot com)
  </notes>
  <contents>
