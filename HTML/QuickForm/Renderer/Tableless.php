@@ -40,7 +40,7 @@ require_once 'HTML/QuickForm/Renderer/Default.php';
  * @author     Mark Wiesemann <wiesemann@php.net>
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
  * @version    Release: @package_version@
- * @link       http://pear.php.net/package/[...]
+ * @link       http://pear.php.net/package/HTML_QuickForm_Renderer_Tableless
  */
 class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
 {
@@ -58,7 +58,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_elementTemplate = 
-        "\n\t\t<div class=\"qfrow\"><label class=\"qflabel\"><!-- BEGIN required --><span style=\"color: #ff0000\">*</span><!-- END required -->{label}</label><div class=\"qfelement<!-- BEGIN error --> error<!-- END error -->\"><!-- BEGIN error --><span class=\"error\">{error}</span><br /><!-- END error -->{element}</div></div><br />";
+        "\n\t\t<div class=\"qfrow\"><label class=\"qflabel\"><!-- BEGIN required --><span class=\"required\">*</span><!-- END required -->{label}</label><div class=\"qfelement<!-- BEGIN error --> error<!-- END error -->\"><!-- BEGIN error --><span class=\"error\">{error}</span><br /><!-- END error -->{element}</div></div><br />";
 
    /**
     * Form template string
@@ -191,7 +191,6 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
                                         'id="' . $id . '" name="' . $id . '"',
                                         $element_html);
             $this->_html .= str_replace('{element}', $element_html, $html);
-
         } elseif (!empty($this->_groupElementTemplate)) {
             $html = str_replace('{label}', $element->getLabel(), $this->_groupElementTemplate);
             if ($required) {
@@ -248,6 +247,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         }
         $this->_hiddenHtml = '';
         $this->_html = str_replace('{content}', $this->_html, $html);
+        $this->_html = str_replace('></label>', '>&nbsp;</label>', $this->_html);
         // add a validation script
         if ('' != ($script = $form->getValidationScript())) {
             $this->_html = $script . "\n" . $this->_html;
