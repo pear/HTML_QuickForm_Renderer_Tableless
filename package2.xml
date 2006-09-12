@@ -26,10 +26,10 @@ echo $renderer->toHtml();</description>
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-08-13</date>
- <time>22:20:00</time>
+ <date>?</date>
+ <time>?</time>
  <version>
-  <release>0.3.3</release>
+  <release>0.3.4</release>
   <api>0.3.1</api>
  </version>
  <stability>
@@ -38,15 +38,10 @@ echo $renderer->toHtml();</description>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License 3.01</license>
  <notes>
-- Bug #8385: another change for XHTML validity: if a label is empty, '&amp;nbsp;'
-  will be used as the label
-  (thanks to Laurent Laville, pear at laurent-laville dot org)
-- Request #8389: use a CSS class for the formatting of the required mark in the
-  element template instead of a hard-coded color; this allows to change the color
-  of the required mark via a stylesheet; the example stylesheet was extended
-  accordingly (form span.required)
-  (thanks to Laurent Laville, pear at laurent-laville dot org)
-- the example file was extended and corrected to be fully XHTML valid
+- Bug #8523: the id attribute wasn't assigned to date elements which caused
+  the generated HTML code to be not XHTML valid
+  (thanks to Eduardo Marinho, eduardo593734256 at gmail dot com)
+- added an example for a (XHTML valid) date element to the example file
  </notes>
  <contents>
   <dir name="/">

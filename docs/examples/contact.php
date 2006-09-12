@@ -93,6 +93,8 @@ $radio[] = &HTML_QuickForm::createElement('radio', 'country', null, 'Austria', '
 $radio[] = &HTML_QuickForm::createElement('radio', 'country', null, 'Other', 'other');
 $form->addGroup($radio, 'group1', 'Choose a country:', ' ');
 
+$form->addElement('date', 'date', 'Date:', array('format' => 'H:i', 'optionIncrement' => array('i' => 5)));
+
 $checkbox = array();
 $checkbox[] = &HTML_QuickForm::createElement('checkbox', 'A1', null, 'France');
 $checkbox[] = &HTML_QuickForm::createElement('checkbox', 'B1', null, 'Germany');
