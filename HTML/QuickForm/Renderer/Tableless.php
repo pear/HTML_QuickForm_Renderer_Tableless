@@ -96,7 +96,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_requiredNoteTemplate = 
-        "\n\t\t{requiredNote}";
+        "\n\t\t<div class=\"qfreqnote\">{requiredNote}</div>";
 
    /**
     * How many fieldsets are open

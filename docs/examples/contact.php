@@ -57,6 +57,8 @@ form div.qfelement {
     margin: 5px 0 0 10px;
     padding: 0;
 }
+form div.qfreqnote {
+}
 form span.error, form span.required {
     color: red;
 }
@@ -127,9 +129,9 @@ if ($form->isSubmitted() && $form->validate()) {
 }
 else {
   $renderer =& new HTML_QuickForm_Renderer_Tableless();
-  $GLOBALS['_HTML_QuickForm_default_renderer'] =& $renderer;
   $renderer->addStopFieldsetElements('submit');
-  $form->display();
+  $form->accept($renderer);
+  echo $renderer->toHtml();
 }
 
 ?>

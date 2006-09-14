@@ -43,6 +43,8 @@ form div.qfelement {
     margin: 5px 0 0 10px;
     padding: 0;
 }
+form div.qfreqnote {
+}
 form span.error, form span.required {
     color: red;
 }
