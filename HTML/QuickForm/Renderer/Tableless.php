@@ -186,11 +186,13 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
             } else {
                 $id = $element->getName();
             }
-            $html = str_replace('<label', '<label for="' . $id . '"', $html);
-            $element_html = preg_replace('#name="' . $id . '#',
-                                         'id="' . $id . '" name="' . $id . '',
-                                         $element_html,
-                                         1);
+            if (!empty($id)) {
+                $html = str_replace('<label', '<label for="' . $id . '"', $html);
+                $element_html = preg_replace('#name="' . $id . '#',
+                                             'id="' . $id . '" name="' . $id . '',
+                                             $element_html,
+                                             1);
+            }
             $this->_html .= str_replace('{element}', $element_html, $html);
         } elseif (!empty($this->_groupElementTemplate)) {
             $html = str_replace('{label}', $element->getLabel(), $this->_groupElementTemplate);
