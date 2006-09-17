@@ -234,7 +234,12 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     {
         // add a required note, if one is needed
         if (!empty($form->_required) && !$form->_freezeAll) {
-            $this->_html .= str_replace('{requiredNote}', $form->getRequiredNote(), $this->_requiredNoteTemplate);
+            $requiredNote = $form->getRequiredNote();
+            // replace default required note by DOM/XHTML optimized note
+            if ($requiredNote == '<span style="font-size:80%; color:#ff0000;">*</span><span style="font-size:80%;"> denotes required field</span>') {
+                $requiredNote = '<span class="required">*</span> denotes required field';
+            }
+            $this->_html .= str_replace('{requiredNote}', $requiredNote, $this->_requiredNoteTemplate);
         }
         // close the open fieldset
         if ($this->_fieldsetsOpen > 0) {

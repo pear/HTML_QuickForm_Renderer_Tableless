@@ -58,6 +58,7 @@ form div.qfelement {
     padding: 0;
 }
 form div.qfreqnote {
+    font-size: 80%; 
 }
 form span.error, form span.required {
     color: red;
