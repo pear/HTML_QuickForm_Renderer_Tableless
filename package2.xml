@@ -26,8 +26,8 @@ echo $renderer->toHtml();</description>
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>?</date>
- <time>?</time>
+ <date>2006-09-18</date>
+ <time>21:30:00</time>
  <version>
   <release>0.3.4</release>
   <api>0.3.1</api>
