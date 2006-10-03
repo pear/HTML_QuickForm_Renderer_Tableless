@@ -66,7 +66,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_formTemplate = 
-        "\n<form{attributes}>\n\t<div style=\"display: none;\">{hidden}</div>\n{content}\n</form>";
+        "\n<form{attributes}>\n\t<div style=\"display: none;\">{hidden}\t</div>\n{content}\n</form>";
 
    /**
     * Template used when opening a fieldset
