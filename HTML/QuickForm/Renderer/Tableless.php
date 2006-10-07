@@ -210,6 +210,48 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     } // end func renderElement
 
    /**
+    * Called when visiting a group, after processing all group elements
+    *
+    * @param    object      An HTML_QuickForm_group object being visited
+    * @access   public
+    * @return   void
+    */
+    function finishGroup(&$group)
+    {
+        $separator = $group->_separator;
+        if (is_array($separator)) {
+            $count = count($separator);
+            $html  = '';
+            for ($i = 0; $i < count($this->_groupElements); $i++) {
+                $html .= (0 == $i? '': $separator[($i - 1) % $count]) . $this->_groupElements[$i];
+            }
+        } else {
+            if (is_null($separator)) {
+                $separator = '&nbsp;';
+            }
+            $html = implode((string)$separator, $this->_groupElements);
+        }
+        if (!empty($this->_groupWrap)) {
+            $html = str_replace('{content}', $html, $this->_groupWrap);
+        }
+        if (!is_null($group->getAttribute('id'))) {
+            $id = $group->getAttribute('id');
+        } else {
+            $id = $group->getName();
+        }
+        $groupTemplate = $this->_groupTemplate;
+        if (!empty($id)) {
+            $groupTemplate = str_replace('<label', '<label for="' . $id . '"', $groupTemplate);
+            $html = preg_replace('#name="' . $id . '#',
+                                 'id="' . $id . '" name="' . $id . '',
+                                 $html,
+                                 1);
+        }
+        $this->_html   .= str_replace('{element}', $html, $groupTemplate);
+        $this->_inGroup = false;
+    } // end func finishGroup
+
+    /**
     * Called when visiting a form, before processing any form elements
     *
     * @param    object      An HTML_QuickForm object being visited

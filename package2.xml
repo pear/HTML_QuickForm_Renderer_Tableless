@@ -26,10 +26,10 @@ echo $renderer->toHtml();</description>
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-09-18</date>
- <time>21:30:00</time>
+ <date>?</date>
+ <time>?</time>
  <version>
-  <release>0.3.4</release>
+  <release>0.3.5</release>
   <api>0.3.1</api>
  </version>
  <stability>
@@ -38,24 +38,9 @@ echo $renderer->toHtml();</description>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License 3.01</license>
  <notes>
-- Bug #8523: the id attribute wasn't assigned to date elements which caused
-  the generated HTML code to be not XHTML valid
-  (thanks to Eduardo Marinho, eduardo593734256 at gmail dot com)
-- Request #8569: added a div element with new class "qfreqnote" to the required
-  note template to allow easier customisation of the required note by only CSS
-  and not calling setRequiredNoteTemplate() for every form.
-  Please note that this renderer now replaces the default (and only the default!)
-  required note by a shortened variant which will be rendered exactly like the
-  default note if the new "qfreqnote" class (see below) is given. The shortened
-  variant is: '<span class="required">*</span> denotes required field'. It is
-  now recommened to use the same format for translated or reformulated required
-  notes.
-  (thanks to Eduardo Marinho, eduardo593734256 at gmail dot com)
-- Fixed label tag for empty or not given element name
-- added examples for date and hierselect elements and two text elements with no
-  and an empty name to the example file (XHTML valid)
-- added a new "form div.qfreqnote" class into the stylesheet and the example
-  file according to request #8569
+- fixed indentation of the closing div tag in the form template
+- added "id" attribute also to group elements (and the "for" attribute to the
+  label tag for groups)
  </notes>
  <contents>
   <dir name="/">
