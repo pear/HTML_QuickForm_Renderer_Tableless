@@ -34,7 +34,7 @@ form fieldset legend {
 form label {
     margin: 0 0 0 5px;
 }
-form label.qflabel {
+form label.element {
     display: block;
     float: left;
     width: 150px;
@@ -51,13 +51,13 @@ form textarea {
 form br {
     clear: left;
 }
-form div.qfelement {
+form div.element {
     display: inline;
     float: left;
     margin: 5px 0 0 10px;
     padding: 0;
 }
-form div.qfreqnote {
+form div.reqnote {
     font-size: 80%; 
 }
 form span.error, form span.required {

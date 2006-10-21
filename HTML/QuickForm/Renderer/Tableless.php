@@ -1,7 +1,7 @@
 <?php
 /**
- * A renderer for HTML_QuickForm that only uses XHTML and CSS but no
- * table tags
+ * Replacement for the default renderer of HTML_QuickForm that uses only XHTML
+ * and CSS but no table tags, and generates fully valid XHTML output
  *
  * PHP versions 4 and 5
  *
@@ -26,8 +26,8 @@
 require_once 'HTML/QuickForm/Renderer/Default.php';
 
 /**
- * A renderer for HTML_QuickForm that only uses XHTML and CSS but no
- * table tags
+ * Replacement for the default renderer of HTML_QuickForm that uses only XHTML
+ * and CSS but no table tags, and generates fully valid XHTML output
  * 
  * You need to specify a stylesheet like the one that you find in
  * data/stylesheet.css to make this work.
@@ -58,7 +58,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_elementTemplate = 
-        "\n\t\t<div class=\"qfrow\"><label class=\"qflabel\"><!-- BEGIN required --><span class=\"required\">*</span><!-- END required -->{label}</label><div class=\"qfelement<!-- BEGIN error --> error<!-- END error -->\"><!-- BEGIN error --><span class=\"error\">{error}</span><br /><!-- END error -->{element}</div></div><br />";
+        "\n\t\t<div class=\"row\"><label class=\"element\"><!-- BEGIN required --><span class=\"required\">*</span><!-- END required -->{label}</label><div class=\"element<!-- BEGIN error --> error<!-- END error -->\"><!-- BEGIN error --><span class=\"error\">{error}</span><br /><!-- END error -->{element}</div></div><br />";
 
    /**
     * Form template string
@@ -96,7 +96,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_requiredNoteTemplate = 
-        "\n\t\t<div class=\"qfreqnote\">{requiredNote}</div>";
+        "\n\t\t<div class=\"reqnote\">{requiredNote}</div>";
 
    /**
     * How many fieldsets are open
