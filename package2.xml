@@ -29,15 +29,16 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <release>beta</release>
   <api>beta</api>
  </stability>
- <license uri="http://www.php.net/license/3_01.txt">PHP License 3.01</license>
+ <license>New BSD</license>
  <notes>
 - this package is now in beta status, i.e. the API can be considered as stable
+- this package is now licensed under the New BSD license
+- end-user documentation is now available in the manual
 - fixed indentation of the closing div tag in the form template
 - added "id" attribute also to group elements (and the "for" attribute to the
   label tag for groups)
 - removed "qf" prefix from CSS class names
   (exception: "label.qflabel" was renamed into "label.element")
-- end-user documentation is now available in the manual
  </notes>
  <contents>
   <dir name="/">
@@ -58,6 +59,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
    <dir name="data">
     <file name="stylesheet.css" role="data" />
    </dir> <!-- /data -->
+   <file name="LICENSE" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
