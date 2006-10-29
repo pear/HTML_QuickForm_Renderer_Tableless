@@ -34,11 +34,32 @@ http://pear.php.net/dtd/package-2.0.xsd">
 - this package is now in beta status, i.e. the API can be considered as stable
 - this package is now licensed under the New BSD license
 - end-user documentation is now available in the manual
-- fixed indentation of the closing div tag in the form template
+- bugfix: for real groups (e.g. groups of checkboxes) the "id" attribute was
+  set two times (and an invalid "for" attribute was added to the label
+  element)
+- changes in the div tag (in the form template) for the hidden elements:
+  * added a line break (\n) after the opening div tag
+  * added a tab (\t) before the closing div tag
+- changes in the templates: rows (consisting of a label and an element) are not
+  put anymore into a div tag, but in a li element (and all li elements in an ol
+  element); this adds also a more semantical meaning to the generated forms
+  (a full list of changes to the templates is available on
+  http://pear.markwiesemann.eu/template-changes-0.4.0.txt)
+- example file: added three hidden form elements
 - added "id" attribute also to group elements (and the "for" attribute to the
   label tag for groups)
 - removed "qf" prefix from CSS class names
   (exception: "label.qflabel" was renamed into "label.element")
+- adjusted the layout in the example file and the bundled stylesheet to the
+  layout of the default renderer:
+  * fieldsets now don't have a border and no top or bottom margin, and the
+    fieldset legends have gotten a grey background (in Firefox not for the whole
+    width of the fieldset)
+  * element labels are now in a bold font
+  * the required note is now horizontally aligned like the form elements, and
+    not as before on the left margin
+  (a comparison of all changes to the stylesheet is available on
+  http://pear.markwiesemann.eu/stylesheet-comparison-0.4.0.txt)
  </notes>
  <contents>
   <dir name="/">

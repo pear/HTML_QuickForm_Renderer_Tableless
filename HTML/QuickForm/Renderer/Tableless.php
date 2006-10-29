@@ -51,8 +51,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @var      string
     * @access   private
     */
-    var $_headerTemplate = 
-        "\n\t\t<legend>{header}</legend>";
+    var $_headerTemplate = "\n\t\t<legend>{header}</legend>\n\t\t<ol>";
 
    /**
     * Element template string
@@ -60,7 +59,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_elementTemplate = 
-        "\n\t\t<div class=\"row\"><label class=\"element\"><!-- BEGIN required --><span class=\"required\">*</span><!-- END required -->{label}</label><div class=\"element<!-- BEGIN error --> error<!-- END error -->\"><!-- BEGIN error --><span class=\"error\">{error}</span><br /><!-- END error -->{element}</div></div><br />";
+        "\n\t\t\t<li><label class=\"element\"><!-- BEGIN required --><span class=\"required\">*</span><!-- END required -->{label}</label><div class=\"element<!-- BEGIN error --> error<!-- END error -->\"><!-- BEGIN error --><span class=\"error\">{error}</span><br /><!-- END error -->{element}</div></li>";
 
    /**
     * Form template string
@@ -68,7 +67,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_formTemplate = 
-        "\n<form{attributes}>\n\t<div style=\"display: none;\">{hidden}\t</div>\n{content}\n</form>";
+        "\n<form{attributes}>\n\t<div style=\"display: none;\">\n{hidden}\t</div>\n{content}\n</form>";
 
    /**
     * Template used when opening a fieldset
@@ -83,14 +82,14 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @var      string
     * @access   private
     */
-    var $_openHiddenFieldsetTemplate = "\n\t<fieldset class=\"hidden\">";
+    var $_openHiddenFieldsetTemplate = "\n\t<fieldset class=\"hidden\">\n\t\t<ol>";
 
    /**
     * Template used when closing a fieldset
     * @var      string
     * @access   private
     */
-    var $_closeFieldsetTemplate = "\n\t</fieldset>";
+    var $_closeFieldsetTemplate = "\n\t\t</ol>\n\t</fieldset>";
 
    /**
     * Required Note template string
@@ -98,7 +97,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @access   private
     */
     var $_requiredNoteTemplate = 
-        "\n\t\t<div class=\"reqnote\">{requiredNote}</div>";
+        "\n\t\t\t<li class=\"reqnote\"><label class=\"element\">&nbsp;</label>{requiredNote}</li>";
 
    /**
     * How many fieldsets are open
@@ -242,13 +241,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
             $id = $group->getName();
         }
         $groupTemplate = $this->_groupTemplate;
-        if (!empty($id)) {
-            $groupTemplate = str_replace('<label', '<label for="' . $id . '"', $groupTemplate);
-            $html = preg_replace('#name="' . $id . '#',
-                                 'id="' . $id . '" name="' . $id . '',
-                                 $html,
-                                 1);
-        }
+
         $this->_html   .= str_replace('{element}', $html, $groupTemplate);
         $this->_inGroup = false;
     } // end func finishGroup

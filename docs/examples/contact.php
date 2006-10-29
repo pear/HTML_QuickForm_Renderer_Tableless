@@ -20,8 +20,7 @@ form {
     width: 560px;
 }
 form fieldset {
-    border: 1px solid black;
-    padding: 10px 0;
+    border: 0;
     margin: 0;
     width: 560px;
 }
@@ -29,7 +28,22 @@ form fieldset.hidden {
     border: 0;
 }
 form fieldset legend {
+    white-space: nowrap;
+    background-color: #CCCCCC;
     font-weight: bold;
+    width: 560px;
+    padding: 1px;
+    border: 1px solid green;
+    display: block;
+}
+form fieldset ol {
+    margin: 0;
+    padding: 0;
+}
+form fieldset li {
+    list-style: none;
+    margin: 0;
+    clear: both;
 }
 form label {
     margin: 0 0 0 5px;
@@ -40,6 +54,7 @@ form label.element {
     width: 150px;
     padding: 0;
     margin: 5px 0 0 0;
+    font-weight: bold;
     text-align: right;
 }
 form input, form textarea, form select {
@@ -57,8 +72,9 @@ form div.element {
     margin: 5px 0 0 10px;
     padding: 0;
 }
-form div.reqnote {
+form li.reqnote {
     font-size: 80%; 
+    margin: 5px 0 0 10px;
 }
 form span.error, form span.required {
     color: red;
@@ -134,6 +150,10 @@ $select->setOptions(array($main, $secondary));
 
 $form->addElement('textarea', 'message', 'Your message:', array('style' => 'width: 300px;', 'cols' => 50, 'rows' => '7'));
 $form->addElement('submit', 'submit', 'Submit');
+
+$form->addElement('hidden', 'hidden1', 'x');
+$form->addElement('hidden', 'hidden2', 'y');
+$form->addElement('hidden', 'hidden3', 'z');
 
 $form->addRule('name', 'Please enter your name', 'required', null, 'client');
 $form->addRule('email', 'Please enter your email address.', 'required', null, 'client');
