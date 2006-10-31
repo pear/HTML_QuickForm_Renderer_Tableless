@@ -19,8 +19,8 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>?</date>
- <time>?</time>
+ <date>2006-10-31</date>
+ <time>14:50:00</time>
  <version>
   <release>0.4.0</release>
   <api>0.4.0</api>
@@ -45,6 +45,11 @@ http://pear.php.net/dtd/package-2.0.xsd">
   element); this adds also a more semantical meaning to the generated forms
   (a full list of changes to the templates is available on
   http://pear.markwiesemann.eu/template-changes-0.4.0.txt)
+
+  WARNING: you need to adopt the stylesheet changes (see also below) to
+           your stylesheets, because otherwise your forms will not work
+           (in terms of layout) anymore
+
 - example file: added three hidden form elements
 - added "id" attribute also to group elements (and the "for" attribute to the
   label tag for groups)
