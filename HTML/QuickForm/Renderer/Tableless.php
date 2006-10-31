@@ -190,7 +190,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
             if (!empty($id)) {
                 $html = str_replace('<label', '<label for="' . $id . '"', $html);
                 $element_html = preg_replace('#name="' . $id . '#',
-                                             'id="' . $id . '" name="' . $id . '',
+                                             'id="' . $id . '" name="' . $id,
                                              $element_html,
                                              1);
             }
@@ -209,6 +209,30 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
             $this->_groupElements[] = $element->toHtml();
         }
     } // end func renderElement
+
+   /**
+    * Renders an hidden element
+    * Called when visiting a hidden element
+    * 
+    * @param object     An HTML_QuickForm_hidden object being visited
+    * @access public
+    * @return void
+    */
+    function renderHidden(&$element)
+    {
+        if (!is_null($element->getAttribute('id'))) {
+            $id = $element->getAttribute('id');
+        } else {
+            $id = $element->getName();
+        }
+        $html = $element->toHtml();
+        if (!empty($id)) {
+            $html = str_replace('name="' . $id,
+                                'id="' . $id . '" name="' . $id,
+                                $html);
+        }
+        $this->_hiddenHtml .= $html . "\n";
+    } // end func renderHidden
 
    /**
     * Called when visiting a group, after processing all group elements

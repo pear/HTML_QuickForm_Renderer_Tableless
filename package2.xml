@@ -48,6 +48,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
 - example file: added three hidden form elements
 - added "id" attribute also to group elements (and the "for" attribute to the
   label tag for groups)
+- added "id" attribute also to hidden elemens
 - removed "qf" prefix from CSS class names
   (exception: "label.qflabel" was renamed into "label.element")
 - adjusted the layout in the example file and the bundled stylesheet to the
