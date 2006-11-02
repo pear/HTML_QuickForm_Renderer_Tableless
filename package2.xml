@@ -19,10 +19,10 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-10-31</date>
- <time>14:50:00</time>
+ <date>2006-11-02</date>
+ <time>19:10:00</time>
  <version>
-  <release>0.4.0</release>
+  <release>0.4.1</release>
   <api>0.4.0</api>
  </version>
  <stability>
@@ -31,41 +31,16 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license>New BSD</license>
  <notes>
-- this package is now in beta status, i.e. the API can be considered as stable
-- this package is now licensed under the New BSD license
-- end-user documentation is now available in the manual
-- bugfix: for real groups (e.g. groups of checkboxes) the "id" attribute was
-  set two times (and an invalid "for" attribute was added to the label
-  element)
-- changes in the div tag (in the form template) for the hidden elements:
-  * added a line break (\n) after the opening div tag
-  * added a tab (\t) before the closing div tag
-- changes in the templates: rows (consisting of a label and an element) are not
-  put anymore into a div tag, but in a li element (and all li elements in an ol
-  element); this adds also a more semantical meaning to the generated forms
-  (a full list of changes to the templates is available on
-  http://pear.markwiesemann.eu/template-changes-0.4.0.txt)
+In some browser (Firefox &lt; 2.0, Safari 2) the layout of the generated was
+broken. This release adds two styles to the "form fieldset" as well as to the
+"form fieldset li" blocks in the stylesheet.
+(thanks to Brett Bieber for the patch)
 
-  WARNING: you need to adopt the stylesheet changes (see also below) to
-           your stylesheets, because otherwise your forms will not work
-           (in terms of layout) anymore
-
-- example file: added three hidden form elements
-- added "id" attribute also to group elements (and the "for" attribute to the
-  label tag for groups)
-- added "id" attribute also to hidden elemens
-- removed "qf" prefix from CSS class names
-  (exception: "label.qflabel" was renamed into "label.element")
-- adjusted the layout in the example file and the bundled stylesheet to the
-  layout of the default renderer:
-  * fieldsets now don't have a border and no top or bottom margin, and the
-    fieldset legends have gotten a grey background (in Firefox not for the whole
-    width of the fieldset)
-  * element labels are now in a bold font
-  * the required note is now horizontally aligned like the form elements, and
-    not as before on the left margin
-  (a comparison of all changes to the stylesheet is available on
-  http://pear.markwiesemann.eu/stylesheet-comparison-0.4.0.txt)
+Comparisons of all changes to the stylesheet are available:
+- between release 0.3.4 and release 0.4.1:
+  http://pear.markwiesemann.eu/stylesheet-comparison-0.3.4-0.4.1.txt
+- between release 0.4.0 and release 0.4.1:
+  http://pear.markwiesemann.eu/stylesheet-comparison-0.4.0-0.4.1.txt
  </notes>
  <contents>
   <dir name="/">
