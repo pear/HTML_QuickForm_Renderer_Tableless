@@ -135,10 +135,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     {
         $name = $header->getName();
         $id = empty($name) ? '' : ' id="' . $name . '"';
-        if (is_null($header->_text)) {
-            $header_html = '';
-        }
-        elseif (!empty($name) && isset($this->_templates[$name])) {
+        if (!empty($name) && isset($this->_templates[$name])) {
             $header_html = str_replace('{header}', $header->toHtml(), $this->_templates[$name]);
         } else {
             $header_html = str_replace('{header}', $header->toHtml(), $this->_headerTemplate);

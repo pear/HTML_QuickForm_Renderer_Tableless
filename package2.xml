@@ -19,10 +19,10 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-11-02</date>
- <time>19:10:00</time>
+ <date>2006-11-09</date>
+ <time>22:15:00</time>
  <version>
-  <release>0.4.1</release>
+  <release>0.4.2</release>
   <api>0.4.0</api>
  </version>
  <stability>
@@ -31,16 +31,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license>New BSD</license>
  <notes>
-In some browser (Firefox &lt; 2.0, Safari 2) the layout of the generated was
-broken. This release adds two styles to the "form fieldset" as well as to the
-"form fieldset li" blocks in the stylesheet.
-(thanks to Brett Bieber for the patch)
-
-Comparisons of all changes to the stylesheet are available:
-- between release 0.3.4 and release 0.4.1:
-  http://pear.markwiesemann.eu/stylesheet-comparison-0.3.4-0.4.1.txt
-- between release 0.4.0 and release 0.4.1:
-  http://pear.markwiesemann.eu/stylesheet-comparison-0.4.0-0.4.1.txt
+- fixed handling of empty header elements (which resulted in invalid XHTML code)
  </notes>
  <contents>
   <dir name="/">
