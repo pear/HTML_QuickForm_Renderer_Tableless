@@ -74,7 +74,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @var      string
     * @access   private
     */
-    var $_openFieldsetTemplate = "\n\t<fieldset{id}>";
+    var $_openFieldsetTemplate = "\n\t<fieldset{id}{attributes}>";
 
    /**
     * Template used when opening a hidden fieldset
@@ -140,11 +140,25 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         } else {
             $header_html = str_replace('{header}', $header->toHtml(), $this->_headerTemplate);
         }
+        $attributes = $header->getAttributes();
+        $strAttr = '';
+        if (is_array($attributes)) {
+            $charset = HTML_Common::charset();
+            foreach ($attributes as $key => $value) {
+                if ($key == 'name') {
+                    continue;
+                }
+                $strAttr .= ' ' . $key . '="' . htmlspecialchars($value, ENT_COMPAT, $charset) . '"';
+            }
+        }
         if ($this->_fieldsetsOpen > 0) {
             $this->_html .= $this->_closeFieldsetTemplate;
             $this->_fieldsetsOpen--;
         }
         $openFieldsetTemplate = str_replace('{id}', $id, $this->_openFieldsetTemplate);
+        $openFieldsetTemplate = str_replace('{attributes}',
+                                            $strAttr,
+                                            $openFieldsetTemplate);
         $this->_html .= $openFieldsetTemplate . $header_html;
         $this->_fieldsetsOpen++;
     } // end func renderHeader
