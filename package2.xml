@@ -34,7 +34,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
 It is now possible to add attributes to the fieldset tags. A short example:
 
 $form->addElement('header', 'header', 'A new fieldset');
-$header =& $form->getElement('header');
+$header =&amp; $form->getElement('header');
 $header->setAttribute('style', 'border: 2px dashed blue;');
 
 (Setting the attributes via addElement() is not possible for 'header' elements.)
