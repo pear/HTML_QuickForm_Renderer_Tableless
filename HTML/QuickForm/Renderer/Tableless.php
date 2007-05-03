@@ -102,7 +102,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @var      string
     * @access   private
     */
-    var $_openHiddenFieldsetTemplate = "\n\t<fieldset class=\"hidden\">\n\t\t<ol>";
+    var $_openHiddenFieldsetTemplate = "\n\t<fieldset class=\"hidden{class}\">\n\t\t<ol>";
 
    /**
     * Template used when closing a fieldset
@@ -128,7 +128,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
 
    /**
     * Array of element names that indicate the end of a fieldset
-    * (a new one will be opened when a the next header element occurs)
+    * (a new one will be opened when the next header element occurs)
     * @var      array
     * @access   private
     */
@@ -195,19 +195,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     */
     function renderElement(&$element, $required, $error)
     {
-        // if the element name indicates the end of a fieldset, close the fieldset
-        if (   in_array($element->getName(), $this->_stopFieldsetElements)
-            && $this->_fieldsetsOpen > 0
-           ) {
-            $this->_html .= $this->_closeFieldsetTemplate;
-            $this->_fieldsetsOpen--;
-        }
-        // if no fieldset was opened, we need to open a hidden one here to get
-        // XHTML validity
-        if ($this->_fieldsetsOpen === 0) {
-            $this->_html .= $this->_openHiddenFieldsetTemplate;
-            $this->_fieldsetsOpen++;
-        }
+        $this->_handleStopFieldsetElements($element->getName());
         if (!$this->_inGroup) {
             $html = $this->_prepareTemplate($element->getName(), $element->getLabel(), $required, $error);
             // the following lines (until the "elseif") were changed / added
@@ -266,6 +254,21 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     } // end func renderHidden
 
    /**
+    * Called when visiting a group, before processing any group elements
+    *
+    * @param object     An HTML_QuickForm_group object being visited
+    * @param bool       Whether a group is required
+    * @param string     An error message associated with a group
+    * @access public
+    * @return void
+    */
+    function startGroup(&$group, $required, $error)
+    {
+        $this->_handleStopFieldsetElements($group->getName());
+        parent::startGroup($group, $required, $error);
+    } // end func startGroup
+
+    /**
     * Called when visiting a group, after processing all group elements
     *
     * @param    object      An HTML_QuickForm_group object being visited
@@ -396,18 +399,53 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
      * (a new one will be opened when a the next header element occurs)
      *
      * @param       mixed      Element name(s) (as array or string)
+     * @param       string     (optional) Class name for the fieldset(s)
      * @access      public
      * @return      void
      */
-    function addStopFieldsetElements($element)
+    function addStopFieldsetElements($element, $class = '')
     {
         if (is_array($element)) {
+            $elements = array();
+            foreach ($element as $name) {
+                $elements[$name] = $class;
+            }
             $this->_stopFieldsetElements = array_merge($this->_stopFieldsetElements,
-                                                       $element);
+                                                       $elements);
         } else {
-            $this->_stopFieldsetElements[] = $element;
+            $this->_stopFieldsetElements[$element] = $class;
         }
     } // end func addStopFieldsetElements
+
+    /**
+     * Handle element/group names that indicate the end of a group
+     *
+     * @param string     The name of the element or group
+     * @access private
+     * @return void
+     */
+    function _handleStopFieldsetElements($element)
+    {
+        // if the element/group name indicates the end of a fieldset, close
+        // the fieldset
+        if (   array_key_exists($element, $this->_stopFieldsetElements)
+            && $this->_fieldsetsOpen > 0
+           ) {
+            $this->_html .= $this->_closeFieldsetTemplate;
+            $this->_fieldsetsOpen--;
+        }
+        // if no fieldset was opened, we need to open a hidden one here to get
+        // XHTML validity
+        if ($this->_fieldsetsOpen === 0) {
+            $replace = '';
+            if ($this->_stopFieldsetElements[$element] != '') {
+                $replace = ' ' . $this->_stopFieldsetElements[$element];
+            }
+            $this->_html .= str_replace('{class}', $replace,
+                                        $this->_openHiddenFieldsetTemplate);
+            $this->_fieldsetsOpen++;
+        }
+    } // end func _handleStopFieldsetElements
 
 } // end class HTML_QuickForm_Renderer_Default
 ?>
