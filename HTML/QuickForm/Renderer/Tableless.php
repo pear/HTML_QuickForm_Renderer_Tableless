@@ -438,7 +438,9 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         // XHTML validity
         if ($this->_fieldsetsOpen === 0) {
             $replace = '';
-            if ($this->_stopFieldsetElements[$element] != '') {
+            if (   array_key_exists($element, $this->_stopFieldsetElements)
+                && $this->_stopFieldsetElements[$element] != ''
+               ) {
                 $replace = ' ' . $this->_stopFieldsetElements[$element];
             }
             $this->_html .= str_replace('{class}', $replace,
