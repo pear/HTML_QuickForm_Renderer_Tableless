@@ -449,5 +449,28 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
         }
     } // end func _handleStopFieldsetElements
 
+    /**
+     * Sets element template 
+     *
+     * @param   string    The HTML surrounding an element 
+     * @param   mixed     (optional) Name(s) of the element to apply template
+     *                    for (either single element name as string or multiple
+     *                    element names as an array)
+     * @access  public
+     * @return  void
+     */
+    function setElementTemplate($html, $element = null)
+    {
+        if (is_null($element)) {
+            $this->_elementTemplate = $html;
+        } elseif (is_array($element)) {
+            foreach ($element as $name) {
+                $this->_templates[$name] = $html;
+            }
+        } else {
+            $this->_templates[$element] = $html;
+        }
+    } // end func setElementTemplate
+
 } // end class HTML_QuickForm_Renderer_Default
 ?>
