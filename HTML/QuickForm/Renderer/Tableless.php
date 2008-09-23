@@ -208,7 +208,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
             }
             if ($element->getType() != 'static' && !empty($id)) {
                 $html = str_replace('<label', '<label for="' . $id . '"', $html);
-                $element_html = preg_replace('#name="' . $id . '#',
+                $element_html = preg_replace(preg_quote('#name="' . $id . '#'),
                                              'id="' . $id . '" name="' . $id,
                                              $element_html,
                                              1);

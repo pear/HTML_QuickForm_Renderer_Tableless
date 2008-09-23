@@ -19,10 +19,10 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>wiesemann@php.net</email>
   <active>yes</active>
  </lead>
- <date>2007-10-24</date>
- <time>22:15:00</time>
+ <date>2008-09-23</date>
+ <time>18:15:00</time>
  <version>
-  <release>0.6.0</release>
+  <release>0.6.1</release>
   <api>0.6.0</api>
  </version>
  <stability>
@@ -31,10 +31,9 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license>New BSD</license>
  <notes>
-- setElementTemplate() now allows to apply a template multiple elements with
-  a single call (the second parameter can now be an array of element names;
-  this addition was inspired by a blog comment from Noel, herrnoel at gmail
-  dot com, thanks)
+- Bug #14443: form fields with regular expression syntax characters (e.g. with
+  '**') were not added to the form and generated a PHP warning
+  (thanks to Nikola Vignjevic)
  </notes>
  <contents>
   <dir name="/">
