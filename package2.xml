@@ -31,9 +31,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license>New BSD</license>
  <notes>
-- Bug #14443: form fields with regular expression syntax characters (e.g. with
-  '**') were not added to the form and generated a PHP warning
-  (thanks to Nikola Vignjevic)
+- Bug #15402: "id" attribute missing on groups
  </notes>
  <contents>
   <dir name="/">

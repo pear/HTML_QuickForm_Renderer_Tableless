@@ -135,6 +135,13 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     var $_stopFieldsetElements = array();
 
    /**
+    * Name of the currently active group
+    * @var      string
+    * @access   private
+    */
+    var $_currentGroupName = '';
+
+   /**
     * Constructor
     *
     * @access public
@@ -225,7 +232,23 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
             $this->_groupElements[] = str_replace('{element}', $element->toHtml(), $html);
 
         } else {
-            $this->_groupElements[] = $element->toHtml();
+            $element_html = $element->toHtml();
+            // add "id" attribute to first element of the group
+            if (count($this->_groupElements) === 0) {
+                if (!is_null($element->getAttribute('id'))) {
+                    $id = $element->getAttribute('id');
+                } else {
+                    $id = $element->getName();
+                }
+                $groupId = $this->_currentGroupName;
+                if ($element->getType() != 'static' && !empty($id)) {
+                    $element_html = preg_replace(preg_quote('#name="' . $id . '#'),
+                                                 'id="' . $groupId . '" name="' . $id,
+                                                 $element_html,
+                                                 1);
+                }
+            }
+            $this->_groupElements[] = $element_html;
         }
     } // end func renderElement
 
@@ -265,7 +288,14 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     function startGroup(&$group, $required, $error)
     {
         $this->_handleStopFieldsetElements($group->getName());
-        parent::startGroup($group, $required, $error);
+        $name = $group->getName();
+        $this->_groupTemplate        = $this->_prepareTemplate($name, $group->getLabel(), $required, $error);
+        $this->_groupTemplate        = str_replace('<label', '<label for="' . $name . '"', $this->_groupTemplate);
+        $this->_groupElementTemplate = empty($this->_groupTemplates[$name])? '': $this->_groupTemplates[$name];
+        $this->_groupWrap            = empty($this->_groupWraps[$name])? '': $this->_groupWraps[$name];
+        $this->_groupElements        = array();
+        $this->_inGroup              = true;
+        $this->_currentGroupName     = $name;
     } // end func startGroup
 
     /**
