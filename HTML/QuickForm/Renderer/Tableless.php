@@ -6,7 +6,7 @@
  * PHP versions 4 and 5
  *
  * LICENSE:
- * 
+ *
  * Copyright (c) 2005-2007, Mark Wiesemann <wiesemann@php.net>
  * All rights reserved.
  *
@@ -17,9 +17,9 @@
  *    * Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
  *    * Redistributions in binary form must reproduce the above copyright
- *      notice, this list of conditions and the following disclaimer in the 
+ *      notice, this list of conditions and the following disclaimer in the
  *      documentation and/or other materials provided with the distribution.
- *    * The names of the authors may not be used to endorse or promote products 
+ *    * The names of the authors may not be used to endorse or promote products
  *      derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
@@ -50,7 +50,7 @@ require_once 'HTML/QuickForm/Renderer/Default.php';
 /**
  * Replacement for the default renderer of HTML_QuickForm that uses only XHTML
  * and CSS but no table tags, and generates fully valid XHTML output
- * 
+ *
  * You need to specify a stylesheet like the one that you find in
  * data/stylesheet.css to make this work.
  *
@@ -78,7 +78,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @var      string
     * @access   private
     */
-    var $_elementTemplate = 
+    var $_elementTemplate =
         "\n\t\t\t<li><label class=\"element\"><!-- BEGIN required --><span class=\"required\">*</span><!-- END required -->{label}</label><div class=\"element<!-- BEGIN error --> error<!-- END error -->\"><!-- BEGIN error --><span class=\"error\">{error}</span><br /><!-- END error -->{element}</div></li>";
 
    /**
@@ -86,7 +86,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @var      string
     * @access   private
     */
-    var $_formTemplate = 
+    var $_formTemplate =
         "\n<form{attributes}>\n\t<div style=\"display: none;\">\n{hidden}\t</div>\n{content}\n</form>";
 
    /**
@@ -116,7 +116,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     * @var      string
     * @access   private
     */
-    var $_requiredNoteTemplate = 
+    var $_requiredNoteTemplate =
         "\n\t\t\t<li class=\"reqnote\"><label class=\"element\">&nbsp;</label>{requiredNote}</li>";
 
    /**
@@ -255,7 +255,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
    /**
     * Renders an hidden element
     * Called when visiting a hidden element
-    * 
+    *
     * @param object     An HTML_QuickForm_hidden object being visited
     * @access public
     * @return void
@@ -350,7 +350,7 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
    /**
     * Called when visiting a form, after processing all form elements
     * Adds required note, form attributes, validation javascript and form content.
-    * 
+    *
     * @param    object      An HTML_QuickForm object being visited
     * @access   public
     * @return   void
@@ -480,9 +480,9 @@ class HTML_QuickForm_Renderer_Tableless extends HTML_QuickForm_Renderer_Default
     } // end func _handleStopFieldsetElements
 
     /**
-     * Sets element template 
+     * Sets element template
      *
-     * @param   string    The HTML surrounding an element 
+     * @param   string    The HTML surrounding an element
      * @param   mixed     (optional) Name(s) of the element to apply template
      *                    for (either single element name as string or multiple
      *                    element names as an array)
