@@ -1,0 +1,32 @@
+{
+    "authors": [
+        {
+            "email": "wiesemann@php.net",
+            "name": "Mark Wiesemann",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "HTML": "./"
+        }
+    },
+    "description": "More info available on: http://pear.php.net/package/HTML_QuickForm_Renderer_Tableless",
+    "include-path": [
+        "./"
+    ],
+    "license": "New BSD",
+    "name": "pear/html_quickform_renderer_tableless",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=HTML_QuickForm_Renderer_Tableless",
+        "source": "https://github.com/pear/HTML_QuickForm_Renderer_Tableless"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*",
+        "pear/html_quickform": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
